@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+var HtmlWebpackPlugin = require('webpack-html-plugin');
 const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 
 module.exports = (env) => {
@@ -11,8 +12,9 @@ module.exports = (env) => {
         context: __dirname,
         resolve: { extensions: [ '.js', '.ts' ] },
         output: {
-            filename: '[name].js',
-            publicPath: '/dist/' // Webpack dev middleware, if enabled, handles requests for this URL prefix
+            path: path.join(__dirname, 'wwwroot'),
+            filename: 'scripts/[name].js',
+            publicPath: '/' // Webpack dev middleware, if enabled, handles requests for this URL prefix
         },
         module: {
             rules: [
@@ -26,15 +28,20 @@ module.exports = (env) => {
     };
 
     // Configuration for client-side bundle suitable for running in browsers
-    const clientBundleOutputDir = './wwwroot/dist';
+    const clientBundleOutputDir = './wwwroot';
     const clientBundleConfig = merge(sharedConfig, {
         entry: { 'main-client': './ClientApp/boot-client.ts' },
         output: { path: path.join(__dirname, clientBundleOutputDir) },
         plugins: [
             new webpack.DllReferencePlugin({
                 context: __dirname,
-                manifest: require('./wwwroot/dist/vendor-manifest.json')
-            })
+                manifest: require('./wwwroot/vendor-manifest.json')
+            }),
+              new HtmlWebpackPlugin({
+                  filename: './index.html',
+                  template: './wwwroot/index-vendor.html',
+                  inject: 'body',
+              }),
         ].concat(isDevBuild ? [
             // Plugins that apply in development builds only
             new webpack.SourceMapDevToolPlugin({
@@ -47,26 +54,4 @@ module.exports = (env) => {
         ])
     });
     return [clientBundleConfig];
-
-    //// Configuration for server-side (prerendering) bundle suitable for running in Node
-    //const serverBundleConfig = merge(sharedConfig, {
-    //    resolve: { mainFields: ['main'] },
-    //    entry: { 'main-server': './ClientApp/boot-server.ts' },
-    //    plugins: [
-    //        new webpack.DllReferencePlugin({
-    //            context: __dirname,
-    //            manifest: require('./ClientApp/dist/vendor-manifest.json'),
-    //            sourceType: 'commonjs2',
-    //            name: './vendor'
-    //        })
-    //    ],
-    //    output: {
-    //        libraryTarget: 'commonjs',
-    //        path: path.join(__dirname, './ClientApp/dist')
-    //    },
-    //    target: 'node',
-    //    devtool: 'inline-source-map'
-    //});
-
-    //return [clientBundleConfig, serverBundleConfig];
 };

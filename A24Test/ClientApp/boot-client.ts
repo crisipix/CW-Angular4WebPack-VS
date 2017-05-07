@@ -5,7 +5,7 @@ import 'core-js/es7/reflect';
 
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { enableProdMode } from '@angular/core';
-import { AppModule } from './app/app.module';
+import { AppModule } from './app.module';
 import 'bootstrap';
 const rootElemTagName = 'app'; // Update this if you change your root component selector
 

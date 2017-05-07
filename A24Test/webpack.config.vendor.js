@@ -1,17 +1,19 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('webpack-html-plugin');
 const merge = require('webpack-merge');
 
 module.exports = (env) => {
-    const extractCSS = new ExtractTextPlugin('vendor.css');
+    const extractCSS = new ExtractTextPlugin('css/vendor.css');
     const isDevBuild = !(env && env.prod);
-    const sharedConfig = {
+    const vendorConfig = {
         stats: { modules: false },
         resolve: { extensions: ['.js'] },
         module: {
             rules: [
-                { test: /\.(png|woff|woff2|eot|ttf|svg)(\?|$)/, use: 'url-loader?limit=100000' }
+                { test: /\.css(\?|$)/, use: extractCSS.extract({ use: isDevBuild ? 'css-loader' : 'css-loader?minimize' }) },
+                { test: /\.(png|woff|woff2|eot|ttf|svg)(\?|$)/, use: 'url-loader?limit=100000&name=css/[name].[ext]' }
             ]
         },
         entry: {
@@ -38,38 +40,31 @@ module.exports = (env) => {
             ]
         },
         output: {
-            publicPath: '/dist/',
-            filename: '[name].js',
+            path: path.join(__dirname, 'wwwroot'),
+            publicPath: '/',
+            filename: 'scripts/[name].js',
             library: '[name]_[hash]'
         },
         plugins: [
+            extractCSS,
+            new webpack.DllPlugin({
+                path: path.join(__dirname, 'wwwroot', '[name]-manifest.json'),
+                name: '[name]_[hash]'
+            }),
+              new HtmlWebpackPlugin({
+                  filename: './index-vendor.html',
+                  template: './ClientApp/index.html',
+                  inject: 'body',
+              }),
             // Maps these identifiers to the jQuery package (because Bootstrap expects it to be a global variable)
             new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery' }),
             // Workaround for https://github.com/angular/angular/issues/11580
             new webpack.ContextReplacementPlugin(/\@angular\b.*\b(bundles|linker)/, path.join(__dirname, './ClientApp')),
             // Workaround for https://github.com/stefanpenner/es6-promise/issues/100
             new webpack.IgnorePlugin(/^vertx$/)
-        ]
-    };
-
-    const clientBundleConfig = merge(sharedConfig, {
-        output: { path: path.join(__dirname, 'wwwroot', 'dist') },
-        module: {
-            rules: [
-                { test: /\.css(\?|$)/, use: extractCSS.extract({ use: isDevBuild ? 'css-loader' : 'css-loader?minimize' }) }
-            ]
-        },
-        plugins: [
-            extractCSS,
-            new webpack.DllPlugin({
-                path: path.join(__dirname, 'wwwroot', 'dist', '[name]-manifest.json'),
-                name: '[name]_[hash]'
-            })
         ].concat(isDevBuild ? [] : [
             new webpack.optimize.UglifyJsPlugin()
         ])
-    });
-
-
-    return [clientBundleConfig];
+    };
+    return [vendorConfig];
 }

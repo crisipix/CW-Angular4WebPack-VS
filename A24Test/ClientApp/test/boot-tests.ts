@@ -1,5 +1,7 @@
 // Load required polyfills and testing libraries
-import 'angular2-universal-polyfills';
+import 'core-js';
+require('zone.js/dist/zone');
+import 'core-js/es7/reflect';
 import 'zone.js/dist/long-stack-trace-zone';
 import 'zone.js/dist/proxy.js';
 import 'zone.js/dist/sync-test';
