@@ -1,0 +1,3 @@
+﻿<h1>Calendar</h1>
+<h2>{{selectedEvent | json}}</h2>
+<p-schedule [events]="events" [header]="headerConfig" (onEventClick)="handleEventClick($event)"></p-schedule>
