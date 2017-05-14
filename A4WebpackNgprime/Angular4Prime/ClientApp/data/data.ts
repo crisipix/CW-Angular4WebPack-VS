@@ -15,7 +15,7 @@
             "start": "2017-05-13"
         },
         {
-            "title": "Long Event",
+            "title": "MSFT Long Event",
             "start": "2017-05-07",
             "end": "2017-05-10"
         },
@@ -23,11 +23,6 @@
             "title": "Long Event",
             "start": "2017-05-23",
             "end": "2017-05-25"
-        },
-        {
-            "title": "Another Long Event",
-            "start": "2017-05-27",
-            "end": "2017-05-30"
         },
         {
             "title": "Repeating Event",
@@ -41,6 +36,16 @@
             "title": "Conference",
             "start": "2017-05-21",
             "end": "2017-05-23"
+        },
+         {
+            "title": "Mid-day Conference",
+            "start": "2017-05-21T16:00",
+            "end": "2017-05-23T16:00"
+        },
+        {
+            "title": "End Of Month Long Event",
+            "start": "2017-05-27",
+            "end": "2017-05-30"
         }
     ];
     

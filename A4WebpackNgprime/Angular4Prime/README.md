@@ -39,3 +39,5 @@ You've created a new ASP.NET Core project. [Learn what's new](https://go.microso
 We would love to hear your [feedback](https://go.microsoft.com/fwlink/?LinkId=518015)
 
 *   [Error Include "BrowserAnimationsModule" or "NoopAnimationsModule" in your application.](http://stackoverflow.com/questions/42994337/navigation-error-in-angular2)
+*   [Visual Studio 2017 install breaks Visual Studio 2015 ASP.NET Core Projects] (http://stackoverflow.com/questions/40674393/visual-studio-2017-install-breaks-visual-studio-2015-asp-net-core-projects)
+*   [No Executable Found Matching Command “dotnet-projectmodel-server”](http://dotnetcoretutorials.com/2017/02/26/no-executable-found-matching-command-dotnet-projectmodel-server/)
