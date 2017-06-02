@@ -1,3 +1,23 @@
 ﻿<h1>Calendar</h1>
 <h2>{{selectedEvent | json}}</h2>
 <p-schedule [events]="events" [header]="headerConfig" (onEventClick)="handleEventClick($event)"></p-schedule>
+<!--start modal 2-->
+<a href="#" #open class="btn btn-lg btn-success" data-toggle="modal" data-target="#basicModal2">Click to open Modal</a>
+<div #modal class="modal" id="basicModal2">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Selected Event Title</h4>
+            </div>
+            <div class="modal-body">
+                <p>{{selectedEvent | json}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end modal 2-->

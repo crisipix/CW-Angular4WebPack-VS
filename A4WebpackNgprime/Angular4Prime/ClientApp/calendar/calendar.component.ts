@@ -1,6 +1,7 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, AfterViewInit, ElementRef, ViewChild} from '@angular/core';
 import { CalendarService } from '../services/calendar.service';
 import 'fullcalendar';
+//@ViewChild('modal') el: ElementRef;
 
 /*
     https://github.com/primefaces/primeng/issues/255
@@ -16,15 +17,20 @@ import 'fullcalendar';
     selector: 'calendar',
     templateUrl: './calendar.component.html'
 })
-export class CalendarComponent implements OnInit
+export class CalendarComponent implements OnInit, AfterViewInit 
 {
     calendarService: CalendarService;
+    rootNode: ElementRef;
     events: any[];
     headerConfig: any;
     selectedEvent: any;
-
-    constructor(calendarService: CalendarService) {
+   // modal = null;
+    @ViewChild('modal') modal: any;//ElementRef; 
+    @ViewChild('open') openmodal: ElementRef; 
+        
+    constructor(calendarService: CalendarService, rootNode: ElementRef) {
         this.calendarService = calendarService;
+        this.rootNode = rootNode;
     }
 
     ngOnInit() {
@@ -40,10 +46,21 @@ export class CalendarComponent implements OnInit
 
     }
 
+    ngAfterViewInit() {
+        //this.modal = $(this.rootNode.nativeElement).find('div.modal');
+        //this.modal = this.rootNode.nativeElement.querySelector('.modal');
+
+        
+    }
+
+    //https://medium.com/tixdo-labs/angular-2-modal-using-bootstrap-97b4dad11dcc
     handleEventClick(e) {
         console.log(e);
         console.log(e.calEvent);
         this.selectedEvent = e.calEvent.title;
+       // this.modal.modal('show');
+        this.openmodal.nativeElement.click();
+        //this.modal.nativeElement.modal('show');
         //e.event = Selected event
         //e.jsEvent = Browser click event
         //e.view = Current view object

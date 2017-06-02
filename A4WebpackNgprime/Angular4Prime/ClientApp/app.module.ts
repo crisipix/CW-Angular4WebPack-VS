@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AccordionModule, InputTextModule, DataTableModule, ButtonModule, DialogModule } from 'primeng/primeng';
 import { ScheduleModule } from 'primeng/primeng';
+import { CalendarModule } from 'primeng/primeng';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './navmenu/navmenu.component';
 import { HomeComponent } from './home/home.component';
@@ -39,6 +40,7 @@ import { CalendarService } from './services/calendar.service';
         ButtonModule,
         DialogModule,
         ScheduleModule,
+        CalendarModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },

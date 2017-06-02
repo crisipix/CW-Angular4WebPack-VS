@@ -14,6 +14,7 @@ export class HomeComponent {
     newCar: boolean;
 
     cars: Car[];
+    value: Date;
 
     constructor() { }
 
