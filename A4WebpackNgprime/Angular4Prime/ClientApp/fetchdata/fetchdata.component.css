@@ -1,0 +1,28 @@
+@media print {
+	/* http://www.joshuawinn.com/css-print-media-query/ */
+	/* https://benfrain.com/create-print-styles-using-css3-media-queries/ */
+	
+	.noprint {display : none !important;}
+	
+	#header, #footer, #nav { display: none !important; } 
+	
+	@page {
+		size: auto;   /* auto is the initial value */
+		margin: 0;  /* this affects the margin in the printer settings */
+	}
+	
+	
+	/* Next up, we can add a 100% (or your preference) width to the main content of the page and remove any padding and margin: */
+	.container {
+        width: 90%;
+        margin: 0px;
+        padding: 0px;
+    }
+    * {
+        color: #000;    
+        background-color: #fff;
+        @include box-shadow(none);
+        @include text-shadow(none);
+    }
+	
+}

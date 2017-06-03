@@ -3,7 +3,8 @@ import { Http } from '@angular/http';
 
 @Component({
     selector: 'fetchdata',
-    templateUrl: './fetchdata.component.html'
+    templateUrl: './fetchdata.component.html',
+    styleUrls: ['./fetchdata.component.css']
 })
 export class FetchDataComponent {
     public forecasts: WeatherForecast[];
@@ -15,6 +16,12 @@ export class FetchDataComponent {
             this.posts = result.json() as Post[];
         });
     }
+
+    printPage() {
+        console.log('print page');
+        window.print();
+    }
+
 }
 
 interface WeatherForecast {
