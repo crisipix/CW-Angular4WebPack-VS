@@ -1,7 +1,10 @@
-﻿import { Component, OnInit, AfterViewInit, ElementRef, ViewChild} from '@angular/core';
+﻿import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, Renderer2} from '@angular/core';
 import { CalendarService } from '../services/calendar.service';
 import 'fullcalendar';
-//@ViewChild('modal') el: ElementRef;
+import * as $ from 'jquery';
+
+//declare var $: any;
+//declare var $: any;// this is very importnant (to work this line: this.modalEl.modal('show')) - don't do this (becouse this owerride jQuery which was changed by bootstrap, included in main html-body template): let $ = require('../../../../../node_modules/jquery/dist/jquery.min.js');
 
 /*
     https://github.com/primefaces/primeng/issues/255
@@ -24,11 +27,11 @@ export class CalendarComponent implements OnInit, AfterViewInit
     events: any[];
     headerConfig: any;
     selectedEvent: any;
-   // modal = null;
-    @ViewChild('modal') modal: any;//ElementRef; 
+   modalEl = null;
+    //@ViewChild('modalEl') modalEl: any; 
     @ViewChild('open') openmodal: ElementRef; 
         
-    constructor(calendarService: CalendarService, rootNode: ElementRef) {
+    constructor(calendarService: CalendarService, rootNode: ElementRef, private rd: Renderer2) {
         this.calendarService = calendarService;
         this.rootNode = rootNode;
     }
@@ -47,9 +50,7 @@ export class CalendarComponent implements OnInit, AfterViewInit
     }
 
     ngAfterViewInit() {
-        //this.modal = $(this.rootNode.nativeElement).find('div.modal');
-        //this.modal = this.rootNode.nativeElement.querySelector('.modal');
-
+        //this.modalEl = $(this.rootNode.nativeElement).find('div.modal');
         
     }
 
@@ -58,12 +59,10 @@ export class CalendarComponent implements OnInit, AfterViewInit
         console.log(e);
         console.log(e.calEvent);
         this.selectedEvent = e.calEvent.title;
-       // this.modal.modal('show');
-        this.openmodal.nativeElement.click();
-        //this.modal.nativeElement.modal('show');
-        //e.event = Selected event
-        //e.jsEvent = Browser click event
-        //e.view = Current view object
+
+        //this.openmodal.nativeElement.click();
+        $('#basicModal2').modal('show');
+        //this.modalEl.modal('show');
     }
 
     //events: any[];
