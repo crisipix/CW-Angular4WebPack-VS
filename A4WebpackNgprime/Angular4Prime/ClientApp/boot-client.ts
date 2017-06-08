@@ -13,6 +13,9 @@ import 'primeng/primeng';
 import 'primeng/resources/themes/omega/theme.css';
 import 'primeng/resources/primeng.min.css';
 
+
+import './app.css';
+
 const rootElemTagName = 'app'; // Update this if you change your root component selector
 
 // Enable either Hot Module Reloading or production mode

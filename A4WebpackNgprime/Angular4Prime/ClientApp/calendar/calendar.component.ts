@@ -14,7 +14,9 @@ import * as $ from 'jquery';
     add fullcalendar to vendor config
     add 'fullcalendar/dist/fullcalendar.min.css' to vendor config
     import full calendar here. 
-    
+
+use either the open button's click trigger to open the modal
+or just call the modal via jquery.
 */
 @Component({
     selector: 'calendar',
@@ -27,8 +29,11 @@ export class CalendarComponent implements OnInit, AfterViewInit
     events: any[];
     headerConfig: any;
     selectedEvent: any;
+    allDay: boolean;
+    startDate: Date;
+    endDate: Date;
    modalEl = null;
-    //@ViewChild('modalEl') modalEl: any; 
+    //@ViewChild('modalEl') modalEl: any; // doesnt work
     @ViewChild('open') openmodal: ElementRef; 
         
     constructor(calendarService: CalendarService, rootNode: ElementRef, private rd: Renderer2) {
@@ -59,6 +64,9 @@ export class CalendarComponent implements OnInit, AfterViewInit
         console.log(e);
         console.log(e.calEvent);
         this.selectedEvent = e.calEvent.title;
+        this.allDay = e.calEvent._allDay;
+        this.startDate = e.calEvent.start;
+        this.endDate = e.calEvent.end;
 
         //this.openmodal.nativeElement.click();
         $('#basicModal2').modal('show');

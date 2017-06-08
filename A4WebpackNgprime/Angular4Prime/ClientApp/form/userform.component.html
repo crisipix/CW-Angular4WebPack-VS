@@ -1,0 +1,70 @@
+﻿<div class="panel">
+    <form class="example-form">
+        <md-input-container class="example-full-width">
+            <input mdInput placeholder="User Form (disabled)" disabled value="User Form Control">
+        </md-input-container>
+
+        <table class="example-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <md-input-container class="example-full-width">
+                        <input mdInput placeholder="First name">
+                    </md-input-container>
+                </td>
+                <td>
+                    <md-input-container class="example-full-width">
+                        <input mdInput placeholder="Last Name">
+                    </md-input-container>
+                </td>
+            </tr>
+        </table>
+
+        <p>
+            <md-input-container class="example-full-width">
+                <textarea mdInput placeholder="Address">1234 Main Street</textarea>
+            </md-input-container>
+            <md-input-container class="example-full-width">
+                <textarea mdInput placeholder="Address 2"></textarea>
+            </md-input-container>
+        </p>
+
+        <table class="example-full-width" cellspacing="0">
+            <tr>
+                <td>
+                    <md-input-container class="example-full-width">
+                        <input mdInput placeholder="City">
+                    </md-input-container>
+                </td>
+                <td>
+                    <!--<md-input-container class="example-full-width">
+                        <input mdInput placeholder="State">
+                    </md-input-container>-->
+                    <md-input-container>
+                        <input mdInput placeholder="State" [mdAutocomplete]="auto" [formControl]="stateCtrl">
+                    </md-input-container>
+
+                    <md-autocomplete #auto="mdAutocomplete">
+                        <md-option *ngFor="let state of filteredStates | async" [value]="state">
+                            {{ state }}
+                        </md-option>
+                    </md-autocomplete>
+                </td>
+                <td>
+                    <md-input-container class="example-full-width">
+                        <input mdInput #postalCode maxlength="5" placeholder="Postal Code" value="12345">
+                        <md-hint align="end">{{postalCode.value.length}} / 5</md-hint>
+                    </md-input-container>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <div class="well">
+        <md-input-container>
+            <input mdInput [mdDatepicker]="picker" placeholder="Choose a date">
+            <!--<span class='fa fa-calendar'></span>-->
+            <button mdSuffix [mdDatepickerToggle]="picker"></button>
+        </md-input-container>
+        <md-datepicker #picker></md-datepicker>
+    </div>
+    
+</div>
