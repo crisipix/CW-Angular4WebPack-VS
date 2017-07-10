@@ -26,7 +26,8 @@ import { CounterComponent } from './counter/counter.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { CalendarService } from './services/calendar.service';
 import { UserFormComponent } from './form/userform.component';
-
+import { UserFormEditComponent } from './form/userform.edit.component';
+import { UserFormService } from './services/userform.service';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -37,9 +38,10 @@ import { UserFormComponent } from './form/userform.component';
         FetchDataComponent,
         HomeComponent,
         CalendarComponent,
-        UserFormComponent
+        UserFormComponent,
+        UserFormEditComponent
     ],
-    providers: [CalendarService],
+    providers: [CalendarService, UserFormService],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
@@ -65,6 +67,7 @@ import { UserFormComponent } from './form/userform.component';
             { path: 'calendar', component: CalendarComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'form', component: UserFormComponent },
+            { path: 'form/edit', component: UserFormEditComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]

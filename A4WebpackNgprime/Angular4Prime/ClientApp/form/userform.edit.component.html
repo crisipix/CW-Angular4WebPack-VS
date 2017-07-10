@@ -2,8 +2,8 @@
 <div class="panel panel-default col-md-7" style="padding-right:0px;padding-left:0px;">
     <div class="panel-heading">
         Panel heading
-        <a [routerLink]="['/form/edit']">
-            <span class='fa fa-note'></span>Edit  User Form
+        <a [routerLink]="['/form']">
+            <span class='fa fa-note'></span>View User Form
         </a>
     </div>
     <div class="panel-body">
@@ -16,22 +16,22 @@
                 <tr>
                     <td>
                         <md-input-container class="example-full-width">
-                            <input mdInput placeholder="First name" disabled [(ngModel)]="userModel.FirstName" name="FirstName">
+                            <input mdInput placeholder="First name" [(ngModel)]="userModel.FirstName" name="FirstName">
                         </md-input-container>
                     </td>
                     <td>
                         <md-input-container class="example-full-width">
-                            <input mdInput placeholder="Last Name" disabled [(ngModel)]="userModel.LastName" name="LastName">
+                            <input mdInput placeholder="Last Name" [(ngModel)]="userModel.LastName" name="LastName">
                         </md-input-container>
                     </td>
                 </tr>
             </table>
             <p>
                 <md-input-container class="example-full-width">
-                    <textarea mdInput placeholder="Address" disabled [(ngModel)]="userModel.Address" name="Address"></textarea>
+                    <textarea mdInput placeholder="Address"  [(ngModel)]="userModel.Address" name="Address"></textarea>
                 </md-input-container>
                 <md-input-container class="example-full-width">
-                    <textarea mdInput placeholder="Address 2" disabled [(ngModel)]="userModel.Address2" name="Address2"></textarea>
+                    <textarea mdInput placeholder="Address 2"  [(ngModel)]="userModel.Address2" name="Address2" ></textarea>
 
                 </md-input-container>
             </p>
@@ -39,7 +39,7 @@
                 <tr>
                     <td>
                         <md-input-container class="example-full-width">
-                            <input mdInput placeholder="City" disabled [(ngModel)]="userModel.City" name="City">
+                            <input mdInput placeholder="City"  [(ngModel)]="userModel.City" name="City">
                         </md-input-container>
                     </td>
                     <td>
@@ -47,7 +47,7 @@
                             <input mdInput placeholder="State">
                         </md-input-container>-->
                         <md-input-container>
-                            <input mdInput placeholder="State" [mdAutocomplete]="auto" [formControl]="stateCtrl"  [(ngModel)]="userModel.State" name="State">
+                            <input mdInput placeholder="State" [mdAutocomplete]="auto" [formControl]="stateCtrl" [(ngModel)]="userModel.State" name="State">
                         </md-input-container>
 
                         <md-autocomplete #auto="mdAutocomplete" class="example-full-width">
@@ -58,7 +58,7 @@
                     </td>
                     <td>
                         <md-input-container class="example-full-width">
-                            <input mdInput #postalCode maxlength="5" placeholder="Postal Code" disabled [(ngModel)]="userModel.ZipCode" name="ZipCode">
+                            <input mdInput #postalCode maxlength="5" placeholder="Postal Code"  [(ngModel)]="userModel.ZipCode" name="ZipCode">
                             <md-hint align="end">{{postalCode.value.length}} / 5</md-hint>
                         </md-input-container>
                     </td>
@@ -67,12 +67,13 @@
         </form>
         <div class="well">
             <md-input-container>
-                <input mdInput [mdDatepicker]="picker" placeholder="Choose a date" disabled [(ngModel)]="userModel.Birthdate" name="Birthdate">
+                <input mdInput [mdDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="userModel.Birthdate" name="Birthdate">
                 <!--<span class='fa fa-calendar'></span>-->
                 <button mdSuffix [mdDatepickerToggle]="picker"></button>
             </md-input-container>
             <md-datepicker #picker></md-datepicker>
         </div>
+        <button type="submit" class="btn btn-primary" (click)="save()">Submit</button>
 
     </div>
     <div class="panel-footer">

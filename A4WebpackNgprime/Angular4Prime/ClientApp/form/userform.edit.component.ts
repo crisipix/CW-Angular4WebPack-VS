@@ -7,11 +7,11 @@ import 'rxjs/add/operator/map';
 
 @Component({
     selector: 'userform',
-    templateUrl: './userform.component.html',
-    styleUrls: ['./userform.component.css']
+    templateUrl: './userform.edit.component.html',
+    styleUrls: ['./userform.edit.component.css']
 })
 
-export class UserFormComponent implements OnInit{
+export class UserFormEditComponent {
     stateCtrl: FormControl;
     filteredStates: any;
     userModel: any;
@@ -67,13 +67,14 @@ export class UserFormComponent implements OnInit{
         'Wisconsin',
         'Wyoming',
     ];
+
     userService: UserFormService;
     constructor(private _userService: UserFormService) {
         this.userService = _userService;
         this.stateCtrl = new FormControl();
         this.filteredStates = this.stateCtrl.valueChanges
-                                .startWith(null)
-                                .map(name => this.filterStates(name));
+            .startWith(null)
+            .map(name => this.filterStates(name));
 
         this.userModel = {
             State: '',
@@ -89,6 +90,10 @@ export class UserFormComponent implements OnInit{
 
     ngOnInit() {
         this.userService.getUser().subscribe(u => this.userModel = u);
+    }
+    save() {
+        console.log(this.userModel);
+        this.userService.setUser(this.userModel);
     }
 
     filterStates(val: string) {
