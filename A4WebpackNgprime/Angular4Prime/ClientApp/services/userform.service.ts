@@ -26,4 +26,9 @@ export class UserFormService {
         console.log(user);
         this.currentUser = user;
     }
+
+    findUser(name: string) : string{
+        console.log(name);
+        return name;
+    }
 }

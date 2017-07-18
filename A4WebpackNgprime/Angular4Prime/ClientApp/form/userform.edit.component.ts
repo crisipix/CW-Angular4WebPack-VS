@@ -1,7 +1,12 @@
 ﻿import { Component, OnInit, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { UserFormService } from '../services/userform.service';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/throttleTime';
+import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 
@@ -15,6 +20,16 @@ export class UserFormEditComponent {
     stateCtrl: FormControl;
     filteredStates: any;
     userModel: any;
+
+    // Use subject
+    username: string;
+    foundname: string;
+    usernameChanged: Subject<string> = new Subject<string>();
+
+    // Using Form Control
+    lookup : string = "";
+    lookupControl = new FormControl();
+
     states = [
         'Alabama',
         'Alaska',
@@ -86,6 +101,23 @@ export class UserFormEditComponent {
             ZipCode: "12345",
             Birthdate: ""
         };
+
+        // debounce
+        this.usernameChanged
+            .debounceTime(400) // wait 400ms after the last event before emitting last event
+            //.distinctUntilChanged() // only emit if value is different from previous value
+            .subscribe(model => {
+                this.username = model;
+                this.foundname = this.userService.findUser(this.username);
+            });
+
+        this.lookupControl
+            .valueChanges
+            .debounceTime(400) // wait 400ms after the last event before emitting last event
+            .subscribe(model => {
+                this.username = model;
+                this.foundname = this.userService.findUser(this.username);
+            })
     }
 
     ngOnInit() {
@@ -100,4 +132,18 @@ export class UserFormEditComponent {
         return val ? this.states.filter(s => new RegExp(`^${val}`, 'gi').test(s))
             : this.states;
     }
+
+    // output the next result. 
+    userChanged(text: string) {
+        this.usernameChanged.next(text);
+    }
+
+    findUser(name: string): string
+    {
+        var result = this.userService.findUser(name);
+        this.username = result;
+        return result;
+    }
+
+
 }

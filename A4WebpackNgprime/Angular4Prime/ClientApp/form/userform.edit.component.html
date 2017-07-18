@@ -9,9 +9,15 @@
     <div class="panel-body">
         <form class="example-form">
             <md-input-container class="example-full-width">
-                <input mdInput placeholder="User Form (disabled)" disabled value="User Form Control">
+                <input mdInput placeholder="Find User" [(ngModel)]="username" name="username" (ngModelChange)="userChanged($event)">
             </md-input-container>
-
+            <md-input-container class="example-full-width">
+                <input mdInput placeholder="Find User Form Control" type=text [value]="lookup" [formControl]="lookupControl">
+            </md-input-container>
+            
+            <div class="alert alert-dismissible alert-success">
+                Subject : {{foundname}}
+            </div>
             <table class="example-full-width" cellspacing="0">
                 <tr>
                     <td>
@@ -28,10 +34,10 @@
             </table>
             <p>
                 <md-input-container class="example-full-width">
-                    <textarea mdInput placeholder="Address"  [(ngModel)]="userModel.Address" name="Address"></textarea>
+                    <textarea mdInput placeholder="Address" [(ngModel)]="userModel.Address" name="Address"></textarea>
                 </md-input-container>
                 <md-input-container class="example-full-width">
-                    <textarea mdInput placeholder="Address 2"  [(ngModel)]="userModel.Address2" name="Address2" ></textarea>
+                    <textarea mdInput placeholder="Address 2" [(ngModel)]="userModel.Address2" name="Address2"></textarea>
 
                 </md-input-container>
             </p>
@@ -39,13 +45,13 @@
                 <tr>
                     <td>
                         <md-input-container class="example-full-width">
-                            <input mdInput placeholder="City"  [(ngModel)]="userModel.City" name="City">
+                            <input mdInput placeholder="City" [(ngModel)]="userModel.City" name="City">
                         </md-input-container>
                     </td>
                     <td>
                         <!--<md-input-container class="example-full-width">
-                            <input mdInput placeholder="State">
-                        </md-input-container>-->
+                        <input mdInput placeholder="State">
+                    </md-input-container>-->
                         <md-input-container>
                             <input mdInput placeholder="State" [mdAutocomplete]="auto" [formControl]="stateCtrl" [(ngModel)]="userModel.State" name="State">
                         </md-input-container>
@@ -58,7 +64,7 @@
                     </td>
                     <td>
                         <md-input-container class="example-full-width">
-                            <input mdInput #postalCode maxlength="5" placeholder="Postal Code"  [(ngModel)]="userModel.ZipCode" name="ZipCode">
+                            <input mdInput #postalCode maxlength="5" placeholder="Postal Code" [(ngModel)]="userModel.ZipCode" name="ZipCode">
                             <md-hint align="end">{{postalCode.value.length}} / 5</md-hint>
                         </md-input-container>
                     </td>
