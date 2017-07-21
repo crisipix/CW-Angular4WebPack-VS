@@ -28,6 +28,8 @@ import { CalendarService } from './services/calendar.service';
 import { UserFormComponent } from './form/userform.component';
 import { UserFormEditComponent } from './form/userform.edit.component';
 import { UserFormService } from './services/userform.service';
+import { ScrollDataComponent } from './fetchdata/scrolldata.component';
+
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -39,7 +41,8 @@ import { UserFormService } from './services/userform.service';
         HomeComponent,
         CalendarComponent,
         UserFormComponent,
-        UserFormEditComponent
+        UserFormEditComponent,
+        ScrollDataComponent
     ],
     providers: [CalendarService, UserFormService],
     imports: [
@@ -66,6 +69,7 @@ import { UserFormService } from './services/userform.service';
             { path: 'counter', component: CounterComponent },
             { path: 'calendar', component: CalendarComponent },
             { path: 'fetch-data', component: FetchDataComponent },
+            { path: 'scroll-data', component: ScrollDataComponent },
             { path: 'form', component: UserFormComponent },
             { path: 'form/edit', component: UserFormEditComponent },
             { path: '**', redirectTo: 'home' }
