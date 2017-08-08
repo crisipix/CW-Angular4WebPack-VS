@@ -13,9 +13,13 @@ export class ScrollDataComponent {
     public posts: Post[];
     public allPosts: Post[];
     constructor(http: Http) {
-        http.get('http://jsonplaceholder.typicode.com/posts').subscribe(result => {
-            this.allPosts = result.json() as Post[];
-            this.posts = this.allPosts.slice(this.start, this.end);
+        http.get('http://jsonplaceholder.typicode.com/posts')
+            .subscribe(result => {
+                setTimeout(() =>
+                    {
+                        this.allPosts = result.json() as Post[];
+                        this.posts = this.allPosts.slice(this.start, this.end);
+                    },3000);
         });
     }
 
@@ -25,7 +29,9 @@ export class ScrollDataComponent {
     }
 
     onScroll(e : any)
-    {        
+    {
+        console.log(`${e.target.scrollHeight} - ${e.target.scrollTop} - ${e.target.clientHeight}`);
+
         var h = document.documentElement,
             b = document.body,
             st = 'scrollTop',

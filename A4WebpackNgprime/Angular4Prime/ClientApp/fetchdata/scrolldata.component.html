@@ -1,6 +1,6 @@
 <div class="panel">
     <h1>Getting Posts</h1>
-    <p *ngIf="!posts"><em>Loading...</em></p>
+    <p *ngIf="!posts" style="margin:auto ; text-align:'center'"><em>Loading...</em><md-spinner></md-spinner></p>
     <div class="panel panel-primary noprint">
         <div class="panel-heading">
             <h3 class="panel-title">Information</h3>
@@ -15,7 +15,7 @@
 
         </div>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="posts">
         <div class="col-md-4">
             <h2>Example body text</h2>
             <p>
