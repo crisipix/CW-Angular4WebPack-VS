@@ -18,6 +18,7 @@ import { MdInputModule } from '@angular/material';
 import { MdAutocompleteModule } from '@angular/material';
 import { MdNativeDateModule } from '@angular/material';
 import { MdDatepickerModule } from '@angular/material';
+import { MdSidenavModule } from '@angular/material';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './navmenu/navmenu.component';
 import { HomeComponent } from './home/home.component';
@@ -29,7 +30,7 @@ import { UserFormComponent } from './form/userform.component';
 import { UserFormEditComponent } from './form/userform.edit.component';
 import { UserFormService } from './services/userform.service';
 import { ScrollDataComponent } from './fetchdata/scrolldata.component';
-
+import { PollDataComponent } from './fetchdata/polldata.component';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -42,7 +43,8 @@ import { ScrollDataComponent } from './fetchdata/scrolldata.component';
         CalendarComponent,
         UserFormComponent,
         UserFormEditComponent,
-        ScrollDataComponent
+        ScrollDataComponent,
+        PollDataComponent
     ],
     providers: [CalendarService, UserFormService],
     imports: [
@@ -72,6 +74,7 @@ import { ScrollDataComponent } from './fetchdata/scrolldata.component';
             { path: 'scroll-data', component: ScrollDataComponent },
             { path: 'form', component: UserFormComponent },
             { path: 'form/edit', component: UserFormEditComponent },
+            { path: 'poll-data', component: PollDataComponent},
             { path: '**', redirectTo: 'home' }
         ])
     ]
