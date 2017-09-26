@@ -20,6 +20,7 @@ export class PollDataComponent {
     constructor(http: Http) {
         this._http = http;
         this.subject$ = new BehaviorSubject<Post[]>([]);
+        // try making empty observable.concatMap(() => fakeHttp().concat(Rx.Observable.empty().delay(5000))).do(() => subject$.next("a"))
         this.subject$.concatMap(s => Observable.of(this.GetPosts()).delay(4000))
             .do(s => { this.subject$.next([]) })
             .subscribe(r => { console.log('post results',this.posts); });
